@@ -1,14 +1,12 @@
 from pydub import AudioSegment
 
-audioUno=AudioSegment.from_file("archivos/Kendrick_Lamar_HUMBLE_.mp3", format="mp3")
-audioDos=AudioSegment.from_file("archivos/FEEL_.mp3", format="mp3")
 
-audioData=audioUno.get_array_of_samples()
-audioDataDos=audioDos.get_array_of_samples()
+audioUno=AudioSegment.from_mp3("archivos/Kendrick_Lamar_HUMBLE_.mp3")
+audioDos=AudioSegment.from_mp3("archivos/FEEL_.mp3")
+duracionTotal=max(len(audioUno), len(audioDos))
 
-for i in range(len(audioDos)):
-    f=i*1000
-    resultado=audioUno[:f]+audioDos[:f]
+mezcla=audioUno.overlay(audioDos[:duracionTotal])
 
 
-resultado.export("resultado.mp3", format="mp3")
+
+mezcla.export("mezcla.mp3", format="mp3")
